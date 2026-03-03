@@ -18,11 +18,14 @@ const server = http.createServer((req, res) => {
     if (req.url === '/') {
         filepath = path.join(__dirname, '../frontend/', 'index.html');
         console.log(filepath);
+    } else if (req.url === '/login') {
+        filepath = path.join(__dirname, '../frontend/', 'login.html');
+        res.write('Login here');
     } else if (req.url === '/subscriptions') {
-        filepath = path.join(__dirname, '../frontend', 'subscription.html')
+        filepath = path.join(__dirname, '../frontend/', 'subscription.html');
         res.write('Subscribe here');
         if (req.method === 'POST') {
-
+            // examine this for sending data to backend
         }
     } else {
         filepath = path.join(__dirname, '../frontend/', '404error.html');
