@@ -1,5 +1,5 @@
+import Hello from "@/components/Hello";
 import React from "react";
-import Hello from "../components/Hello";
 
 const Home = () => {
     console.log('server component')
