@@ -5,13 +5,15 @@ const NavBar = () => {
         <header>
             <nav>
                 <Link href='/' className="logo">
-                    <p>Dev Event</p>
+                    <p>NewsFlash</p>
                 </Link>
 
                 <ul>
-                    <Link href='/'>Home</Link>
-                    <Link href='/'>Events</Link>
-                    <Link href='/'>Create Event</Link>
+                    <Link href='/' key='home'>Home</Link>
+                    <Link href="/accounts" key='accounts'>Account</Link>
+                    <Link href="/" key='subscriptions'>Subscriptions</Link>
+                    <Link href="/" key='favourites'>Favourites</Link>
+                    <Link href="/" key='biases'>Biases</Link>
                 </ul>
             </nav>
         </header>
