@@ -9,11 +9,11 @@ const NavBar = () => {
                 </Link>
 
                 <ul>
-                    <Link href='/' key='home'>Home</Link>
-                    <Link href="/accounts" key='accounts'>Account</Link>
-                    <Link href="/" key='subscriptions'>Subscriptions</Link>
-                    <Link href="/" key='favourites'>Favourites</Link>
-                    <Link href="/" key='biases'>Biases</Link>
+                    <li key='home'><Link href='/'>Home</Link></li>
+                    <li key='accounts'><Link href="/accounts">Account</Link></li>
+                    <li key='subscriptions'><Link href="/">Subscriptions</Link></li>
+                    <li key='favourites'><Link href="/">Favourites</Link></li>
+                    <li key='biases'><Link href="/">Biases</Link></li>
                 </ul>
             </nav>
         </header>
