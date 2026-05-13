@@ -1,8 +1,18 @@
 import React from 'react'
+import Form from 'next/form'
 
 const page = () => {
   return (
-    <div>page</div>
+    <Form action="/search">
+        <div>Username</div>
+        <input type="text" id="username" placeholder="Enter your username" />
+        <div>Password</div>
+        <input type="text" id="username" placeholder="Enter your password" />
+        <div>
+            <button id="submitBtn">Submit</button>
+        </div>
+    </Form>
+    
   )
 }
 
