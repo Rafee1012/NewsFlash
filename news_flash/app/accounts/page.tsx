@@ -8,13 +8,13 @@ const Account = () => {
             <p className="text-center mt-5">Please register or log into an existing account.</p>
 
             <button type="button" id="sign-up-btn" className="mt-7 mx-auto" onClick={() => console.log('Click')}>
-            <a href="/">
+            <a href="/accounts/signup">
                 Sign Up
             </a>
             <br />
         </button>
             <button type="button" id="sign-in-btn" className="mt-7 mx-auto" onClick={() => console.log('Click')}>
-                <a href="/">
+                <a href="/accounts/signup">
                     Sign In
                 </a>
             </button>
