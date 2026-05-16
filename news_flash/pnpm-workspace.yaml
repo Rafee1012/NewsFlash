@@ -1,5 +1,8 @@
 allowBuilds:
-  better-sqlite3: false
-  msw: false
-  sharp: false
-  unrs-resolver: false
+  '@prisma/client': false
+  '@prisma/engines': true
+  better-sqlite3: true
+  msw: true
+  prisma: true
+  sharp: true
+  unrs-resolver: true
