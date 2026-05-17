@@ -3,6 +3,7 @@ import ExploreBtn from '@/components/ExploreBtn';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import Link from 'next/link';
+import { signOutAction } from './actions/auth';
 
 const events = [
     {
@@ -31,21 +32,36 @@ const Page = async () => {
     });
 
     if (!session) {
-    return (
-      <div className="flex flex-col items-center justify-center h-screen gap-32">
-        <h1 className="text-8xl font-bold">NewsFlash</h1>
-        <div className="flex gap-8 mt-8">
-          <button>
-            <Link href="/signup">Sign Up</Link>
-          </button>
-          <button>
-            <Link href="/signin">Sign In</Link>
-          </button>
+        return (
+        <div className="flex flex-col items-center justify-center h-screen gap-32">
+            <h1 className="text-8xl font-bold">NewsFlash</h1>
+            <div className="flex gap-8 mt-8">
+            <button>
+                <Link href="/signup">Sign Up</Link>
+            </button>
+            <button>
+                <Link href="/signin">Sign In</Link>
+            </button>
+            </div>
         </div>
-      </div>
-    );
-  }
+        );
+    }
 
+    return (
+    <div className="flex flex-col items-center justify-center h-screen gap-4">
+      <h1 className="text-4xl font-bold">NewsFlash</h1>
+      <div className="mt-8 text-center">
+        <p className="text-lg mb-4">User ID: {session.user.id}</p>
+        <form action={signOutAction}>
+          <button type="submit">
+            Logout
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+
+  /*
     return (
         <section>
             <h1 className="text-center">Welcome to<br /> NewsFlash</h1>
@@ -65,7 +81,8 @@ const Page = async () => {
                 </ul>
             </div>
         </section>
-    )
+    );
+    */
 }
 
 export default Page;
