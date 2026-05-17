@@ -10,7 +10,6 @@ const NavBar = () => {
 
                 <ul>
                     <li key='home'><Link href='/'>Home</Link></li>
-                    <li key='accounts'><Link href="/accounts">Account</Link></li>
                     <li key='subscriptions'><Link href="/">Subscriptions</Link></li>
                     <li key='favourites'><Link href="/">Favourites</Link></li>
                     <li key='biases'><Link href="/">Biases</Link></li>

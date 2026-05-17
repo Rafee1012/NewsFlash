@@ -1,5 +1,8 @@
 import EventCard from '@/components/EventCard';
 import ExploreBtn from '@/components/ExploreBtn';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import Link from 'next/link';
 
 const events = [
     {
@@ -22,7 +25,27 @@ const events = [
     }
 ]
 
-const Page = () => {
+const Page = async () => {
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+
+    if (!session) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen gap-32">
+        <h1 className="text-8xl font-bold">NewsFlash</h1>
+        <div className="flex gap-8 mt-8">
+          <button>
+            <Link href="/signup">Sign Up</Link>
+          </button>
+          <button>
+            <Link href="/signin">Sign In</Link>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
     return (
         <section>
             <h1 className="text-center">Welcome to<br /> NewsFlash</h1>
