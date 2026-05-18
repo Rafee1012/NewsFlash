@@ -17,3 +17,5 @@ export default function SignInPage() {
     </div>
   );
 }
+
+{/*TODO: strengthen password verification, check if password already in use, check if email valid, check if email already in use*/}
