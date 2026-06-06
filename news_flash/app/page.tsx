@@ -2,6 +2,7 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import Link from 'next/link';
 import { signOutAction } from './actions/auth';
+import GenerateBtn from '@/components/GenerateBtn';
 
 const Page = async () => {
     const session = await auth.api.getSession({
@@ -23,6 +24,7 @@ const Page = async () => {
     return (
         <div className="flex flex-col items-center justify-center h-screen gap-6">
             <h1 className="text-4xl font-bold">welcome to home</h1>
+            <GenerateBtn />
             <form action={signOutAction}>
                 <button type="submit">Logout</button>
             </form>
