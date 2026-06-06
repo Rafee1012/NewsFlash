@@ -14,8 +14,8 @@ export async function POST(request: Request) {
     const url = `https://api.currentsapi.services/v1/latest-news?language=en&apiKey=${encodeURIComponent(apiKey)}`;
 
     // configurable timeout and retries
-    const timeoutMs = Number(process.env.CURRENTS_TIMEOUT_MS) || 15000; // default 15s
-    const maxRetries = 1; // one retry on timeout/errors
+  const timeoutMs = Number(process.env.CURRENTS_TIMEOUT_MS) || 15000; // default 15s
+  const maxRetries = 1; // allow one retry on transient problems
 
     let res: Response | null = null;
     let lastError: any = null;
@@ -23,10 +23,15 @@ export async function POST(request: Request) {
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), timeoutMs);
+      const attemptStart = Date.now();
+      console.log(`Currents fetch attempt=${attempt} url=${url} timeoutMs=${timeoutMs}`);
 
       try {
         res = await fetch(url, { method: 'GET', signal: controller.signal });
         clearTimeout(timeout);
+
+        const dur = Date.now() - attemptStart;
+        console.log(`Currents fetch finished attempt=${attempt} status=${res.status} durationMs=${dur}`);
 
         if (!res.ok) {
           const text = await res.text();
@@ -38,6 +43,9 @@ export async function POST(request: Request) {
       } catch (err: any) {
         clearTimeout(timeout);
         lastError = err;
+        const dur = Date.now() - attemptStart;
+        console.warn(`Currents fetch error attempt=${attempt} err=${String(err)} durationMs=${dur}`);
+
         // if aborted, retry once; otherwise break and return error
         if (err && err.name === 'AbortError') {
           // try again if attempts remain
@@ -59,11 +67,14 @@ export async function POST(request: Request) {
     const data = await res.json();
     // Currents returns an object with a `news` array containing articles with `title`.
     const news = Array.isArray(data.news) ? data.news : [];
-    // map to objects with title and url when available
+    // map to objects with title, url, image and description when available
     const items = news
       .map((n: any) => ({
         title: n.title || n.title_original || null,
         url: n.url || n.source || null,
+        image: n.image || n.image_url || n.thumbnail || null,
+        description: n.description || n.summary || null,
+        source: (n.source && n.source.name) || n.source || null,
       }))
       .filter((it: any) => it.title)
       .slice(0, 5);
